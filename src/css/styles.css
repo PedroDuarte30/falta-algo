@@ -102,6 +102,8 @@ header h1 span {
     border: 0;
 }
 
+
+
 /*Media Queries*/
 @media (min-width: 769px) {
     .container {
