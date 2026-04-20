@@ -24,7 +24,8 @@
       </header>
 
       <main>
-        <section id="input-section">
+        <section id="add-item" aria-labelledby="add-title">
+           <h2 id="add-title" class="sr-only">Adicionar ao Carrinho 🛒 </h2>
           <form id="item-form">
             <input
               type="text"
@@ -34,12 +35,13 @@
             />
             <select id="category-select">
               <option value="Laticínios 🥛">Laticínios</option>
-              <option value="Frutas/Veg 🍎">Frutas/Veg</option>
+              <option value="Frutas/Vegetais 🍎">Frutas/Vegetais</option>
               <option value="Higiene 🧼">Higiene</option>
               <option value="Limpeza 🧹">Limpeza</option>
               <option value="Extras ⭐">Extras</option>
             </select>
-            <button type="submit" id="add-button">Adicionar</button>
+            <button type="submit" id="add-button">
+              <i class="ri-add-line"></i> Adicionar </button>
           </form>
         </section>
 
