@@ -1,0 +1,32 @@
+:root {
+  /* Colors */
+  --primary: #27ae60;
+  --primary-dark: #1e8449;
+  --bg: #e8e8e8;
+  --card: #ffffff;
+  --text-main: #2d3436;
+  --text-muted: #636e72;
+  --danger: #ff7675;
+  --border: #dfe6e9;
+
+  /* Typography */
+  --font-logo: "Orbitron", sans-serif;
+  --font-title: "Montserrat", sans-serif;
+  --font-xl: 2.4rem;
+  --font-lg: 1.8rem;
+  --font-md: 1.6rem;
+  --font-sm: 1.4rem;
+  --font-xs: 1.2rem;
+  --weight-regular: 400;
+  --weight-bold: 700;
+
+  /* Pitch and Radius */
+  --spacing-lg: 2.4rem;
+  --spacing-md: 1.6rem;
+  --spacing-sm: 0.8rem;
+  --radius: 1.2rem;
+  --shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.05);
+
+  /* Touch Targets */
+  --touch-target: 4.8rem;
+}

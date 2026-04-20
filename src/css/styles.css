@@ -1,0 +1,128 @@
+@import url(variables.css);
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: var(--font-sm);
+  background-color: var(--bg);
+  color: var(--text-main);
+  padding: 2rem;
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+}
+
+header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+header h1 {
+  font-family: var(--font-logo);
+  font-size: var(--font-xl);
+}
+
+header h1 span {
+  color: var(--primary);
+}
+
+/*Mobile*/
+/*Add section*/
+#add-item {
+  margin-bottom: var(--spacing-lg);
+}
+
+#item-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+#item-input,
+#category-select,
+#add-button {
+  min-height: var(--touch-target);
+  padding: 0 var(--spacing-md);
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--border);
+  font-family: "Poppins", sans-serif;
+  font-size: var(--font-md);
+  width: 100%;
+}
+
+#item-input:focus,
+#category-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+#add-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#add-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/*Inventory Section*/
+#category-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg); 
+}
+
+/* Utility class for hiding accessibility labels */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/*Media Queries*/
+@media (min-width: 769px) {
+    .container {
+        max-width: 60rem;
+        margin: 0 auto;
+    }
+
+    #item-form {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #item-input{
+        flex: 2;
+    }
+
+    #category-select {
+        flex: 1;
+    }
+
+    #add-button {
+        flex: 0.8;
+    }
+}
