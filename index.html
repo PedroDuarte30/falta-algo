@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <title>Falta Algo | Inventário</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Falta<span>Algo</span></h1>
+        <p>O que falta comprar hoje?</p>
+      </header>
+
+      <main>
+        <section id="input-section">
+          <form id="item-form">
+            <input
+              type="text"
+              id="item-input"
+              placeholder="Adicionar Item"
+              required
+            />
+            <select id="category-select">
+              <option value="Laticínios 🥛">Laticínios</option>
+              <option value="Frutas/Veg 🍎">Frutas/Veg</option>
+              <option value="Higiene 🧼">Higiene</option>
+              <option value="Limpeza 🧹">Limpeza</option>
+              <option value="Extras ⭐">Extras</option>
+            </select>
+            <button type="submit" id="add-button">Adicionar</button>
+          </form>
+        </section>
+
+        <section id="inventory-section">
+          <div id="category-wrapper"></div>
+        </section>
+      </main>
+    </div>
+    <script src="src/js/main.js"></script>
+  </body>
+</html>
