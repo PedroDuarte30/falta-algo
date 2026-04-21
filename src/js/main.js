@@ -67,7 +67,7 @@ const inventarioBase = {
 
 };
 
-function renderizarInventário() {
+function renderizarInventario() {
     categoryWrapper.innerHTML = '';
 
     for (const categoria in inventarioBase) {
@@ -85,24 +85,31 @@ function renderizarInventário() {
         list.className = 'items-container';
 
         inventarioBase[categoria].forEach(item => {
-            const li = document.createElement('li'); 
+            const li = document.createElement('li');
             li.className = 'inventory-item';
             li.innerHTML = `<span>${item}</span>`;
 
             /* Selection toggle */
             li.addEventListener('click', () => {
-                li.classList.toggle('selected');
+                if (!li.classList.contains('missing') && !li.classList.contains('checked')) {
+                    li.classList.add('missing');
+                }
+                else if (li.classList.contains('missing')) {
+                    li.classList.remove('missing');
+                    li.classList.add('checked');
+                }
+                else {
+                    li.classList.remove('checked');
+                }
             });
 
-            // Add the LI inside the UL
             list.appendChild(li);
         });
 
         //Close the structure: UL goes into the Group, Group goes into the Wrapper
         group.appendChild(list);
         categoryWrapper.appendChild(group);
-        
     }
 }
 
-renderizarInventário();
+renderizarInventario();
