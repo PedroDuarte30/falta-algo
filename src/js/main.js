@@ -1,6 +1,6 @@
 const categoryWrapper = document.getElementById('category-wrapper');
 const itemForm = document.getElementById('item-form');
-const imtemInput = document.getElementById('item-input');
+const itemInput = document.getElementById('item-input');
 
 const inventarioBase = {
     "Laticínios e Ovos 🥚 🥛":
@@ -64,7 +64,10 @@ const inventarioBase = {
             "Papel Higiénico",
             "Pasta de Dentes"
         ],
-
+    "Extras ✨":
+        [
+        
+        ],
 };
 
 function renderizarInventario() {
@@ -113,3 +116,19 @@ function renderizarInventario() {
 }
 
 renderizarInventario();
+
+itemForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const valor = itemInput.value.trim();
+
+    if(valor !== "") {
+        inventarioBase["Extras ✨"].push(valor);
+
+        itemInput.value = "";
+
+        renderizarInventario();
+
+        itemInput.focus();
+    }
+})
