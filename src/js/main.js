@@ -123,7 +123,7 @@ itemForm.addEventListener('submit', (e) => {
     const valor = itemInput.value.trim();
 
     if(valor !== "") {
-        inventarioBase["Extras ✨"].push(valor);
+        inventarioBase["Laticínios e Ovos 🥚 🥛",  "Frutas & Vegetais 🍎", "Talho 🥩,", "Congelados 🥶", "Mercearia 🧺", "Higiene 🧼 e Limpeza 🫧", "Extras ✨"].push(valor);
 
         itemInput.value = "";
 
