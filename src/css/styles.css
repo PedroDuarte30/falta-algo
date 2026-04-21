@@ -71,60 +71,122 @@ header h1 span {
 }
 
 #add-button {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
 #add-button:hover {
-    background-color: var(--primary-dark);
+  background-color: var(--primary-dark);
 }
 
 /*Inventory Section*/
 #category-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg); 
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
 }
 
 /* Utility class for hiding accessibility labels */
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
+.category-group h2 {
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0;
+  font-family: var(--font-title);
+  font-size: var(--font-md);
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  border-bottom: 0.2rem solid var(--border);
+  padding-bottom: 0.5rem;
+}
 
+.items-container {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: 0;
+}
+
+.inventory-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  border-radius: var(--radius);
+  border: 0.2rem solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+  min-height: var(--touch-target);
+}
+
+.inventory-item::after {
+  display: inline-block;
+  margin-left: 1rem;
+  min-width: 2.5rem;
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+/* Status: OUT OF STOCK (Red) */
+.inventory-item.missing {
+  background-color: #fff5f5;
+  border-color: var(--danger);
+  color: #c0392b;
+}
+
+.inventory-item.missing::after {
+  content: "❌";
+}
+
+/* Status: IN CART (Green) */
+.inventory-item.checked {
+  background-color: #f0fff4;
+  border-color: var(--primary);
+  opacity: 0.6;
+}
+
+.inventory-item.checked::after {
+  content: "✅";
+}
 
 /*Media Queries*/
 @media (min-width: 769px) {
-    .container {
-        max-width: 60rem;
-        margin: 0 auto;
-    }
+  .container {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
 
-    #item-form {
-        flex-direction: row;
-        align-items: center;
-    }
+  #item-form {
+    flex-direction: row;
+    align-items: center;
+  }
 
-    #item-input{
-        flex: 2;
-    }
+  #item-input {
+    flex: 2;
+  }
 
-    #category-select {
-        flex: 1;
-    }
+  #category-select {
+    flex: 1;
+  }
 
-    #add-button {
-        flex: 0.8;
-    }
+  #add-button {
+    flex: 0.8;
+  }
 }
