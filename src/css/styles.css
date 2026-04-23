@@ -25,15 +25,23 @@ body {
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  background-color: var(--bg);
+  padding-bottom: 0.5rem;
   text-align: center;
-  margin-bottom: var(--spacing-lg);
 }
 
 header h1 {
   font-family: var(--font-logo);
   font-size: var(--font-xl);
+  margin-bottom: 0;
 }
 
+header p {
+  margin-bottom: 1rem;
+}
 header h1 span {
   color: var(--primary);
 }
@@ -41,15 +49,18 @@ header h1 span {
 /*Mobile*/
 /*Add section*/
 #add-item {
-  margin-bottom: var(--spacing-lg);
+  position: sticky;
+  top: 6rem; 
+  z-index: 1000;
+  background-color: var(--bg);
+  padding-bottom: 0.895rem;
 }
-
 #item-form {
   display: flex;
   flex-direction: column;
+  padding: 1rem 0 2rem 0;
   gap: var(--spacing-md);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
 
 #item-input,
