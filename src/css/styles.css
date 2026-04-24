@@ -191,27 +191,20 @@ header h1 span {
   content: "✅";
 }
 
-/*Media Queries*/
 @media (min-width: 769px) {
   .container {
-    max-width: 60rem;
+    max-width: 800px;
     margin: 0 auto;
   }
 
   #item-form {
     flex-direction: row;
-    align-items: center;
-  }
+    align-items: stretch; 
 
-  #item-input {
-    flex: 2;
-  }
-
-  #category-select {
-    flex: 1;
   }
 
   #add-button {
-    flex: 0.8;
+    white-space: nowrap; 
+    padding: 0 20px;
   }
 }
