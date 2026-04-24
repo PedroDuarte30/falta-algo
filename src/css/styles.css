@@ -65,7 +65,8 @@ header h1 span {
 
 #item-input,
 #category-select,
-#add-button {
+#add-button,
+#reset-button {
   min-height: var(--touch-target);
   padding: 0 var(--spacing-md);
   border-radius: 0.8rem;
@@ -91,6 +92,19 @@ header h1 span {
 }
 
 #add-button:hover {
+  background-color: var(--primary-dark);
+}
+
+#reset-button{
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#reset-button:hover {
   background-color: var(--primary-dark);
 }
 
