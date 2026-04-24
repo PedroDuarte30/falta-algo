@@ -89,7 +89,7 @@ function renderizarInventario() {
                 } else {
                     li.classList.remove('checked');
                 }
-                guardarlocalStorage(); // Guarda sempre que mudas a cor
+                guardarlocalStorage(); 
             });
             list.appendChild(li);
         });
@@ -111,7 +111,7 @@ itemForm.addEventListener('submit', (e) => {
             itemInput.value = "";
             renderizarInventario();
             itemInput.focus();
-            guardarlocalStorage(); // Guarda o novo item adicionado
+            guardarlocalStorage(); 
         } else {
             console.error("Categoria não encontrada:" + categoriaEscolhida);
         }
@@ -119,7 +119,6 @@ itemForm.addEventListener('submit', (e) => {
 });
 
 function guardarlocalStorage() {
-    // Guarda a lista de nomes (incluindo os extras novos)
     localStorage.setItem('meuInventario', JSON.stringify(inventarioBase));
 
     // Guarda os estados das cores
@@ -146,10 +145,8 @@ function carregarLocalStorage() {
         }
     }
 
-    // Desenha a interface com os itens carregados
     renderizarInventario();
 
-    // Aplica as cores guardadas aos itens que acabaram de ser criados
     document.querySelectorAll('.inventory-item').forEach(li => {
         const nome = li.querySelector('span').textContent;
         if (estadosSalvos[nome]) {
@@ -158,5 +155,17 @@ function carregarLocalStorage() {
     });
 }
 
-// Inicializa a aplicação carregando os dados da memória
 carregarLocalStorage();
+
+const resetButton = document.getElementById('reset-button');
+
+resetButton.addEventListener('click', () => {
+    const confirmacao = window.confirm("Tem a certeza que pretende limpar a lista?");
+
+    if(confirmacao) {
+        localStorage.removeItem('meuInventario');
+        localStorage.removeItem('meuInventario_estados');
+
+        location.reload();
+    } 
+});
