@@ -3,7 +3,6 @@ const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const categorySelect = document.getElementById('category-select');
 
-
 let inventarioBase = {
     "Laticínios e Ovos 🥚 🥛": ["Leite", "Leite Achocolatado", "Iogurtes", "Manteiga", "Ovos", "Queijo", "Fiambre"],
     "Frutas & Vegetais 🍎": ["Maçãs", "Pêras", "Bananas", "Fruta da Época", "Saladas", "Tomate", "Pepino", "Cebola"],
@@ -14,10 +13,9 @@ let inventarioBase = {
     "Extras ✨": []
 };
 
-
 function renderizarInventario() {
     categoryWrapper.innerHTML = '';
-    
+
     const estadosSalvos = JSON.parse(localStorage.getItem('meuInventario_estados')) || {};
 
     for (const categoria in inventarioBase) {
@@ -31,10 +29,18 @@ function renderizarInventario() {
         const list = document.createElement('ul');
         list.className = 'items-container';
 
-        inventarioBase[categoria].forEach(item => {
+        inventarioBase[categoria].forEach((item) => {
             const li = document.createElement('li');
             li.className = 'inventory-item';
-            li.innerHTML = `<span>${item}</span>`;
+            li.innerHTML = `
+                <span>${item}</span>
+                <div class="item-actions">
+                <span class="item-status"></span>
+                <button class="remove-btn" aria-label="Remover ${item}">
+                <i class="ri-delete-bin-line"></i>
+                </button>
+                </div>
+                `;
 
             if (estadosSalvos[item]) {
                 li.classList.add(estadosSalvos[item]);
@@ -49,8 +55,17 @@ function renderizarInventario() {
                 } else {
                     li.classList.remove('checked');
                 }
-                guardarlocalStorage(); 
+                guardarlocalStorage();
             });
+
+            const removeBtn = li.querySelector('.remove-btn');
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                inventarioBase[categoria] = inventarioBase[categoria].filter((i) => i !== item);
+                guardarlocalStorage();
+                renderizarInventario();
+            });
+
             list.appendChild(li);
         });
 
@@ -58,7 +73,6 @@ function renderizarInventario() {
         categoryWrapper.appendChild(group);
     }
 }
-
 
 function guardarlocalStorage() {
     localStorage.setItem('meuInventario', JSON.stringify(inventarioBase));
@@ -95,23 +109,11 @@ itemForm.addEventListener('submit', (e) => {
         if (inventarioBase[categoriaEscolhida]) {
             inventarioBase[categoriaEscolhida].push(valor);
             itemInput.value = "";
-            
-            // Grava primeiro e depois renderiza
-            guardarlocalStorage(); 
+            guardarlocalStorage();
             renderizarInventario();
-            
             itemInput.focus();
         }
     }
 });
 
 carregarLocalStorage();
-
-const resetButton = document.getElementById('reset-button');
-resetButton.addEventListener('click', () => {
-    if (window.confirm("Tem a certeza que pretende limpar a lista?")) {
-        localStorage.removeItem('meuInventario');
-        localStorage.removeItem('meuInventario_estados');
-        location.reload();
-    } 
-});

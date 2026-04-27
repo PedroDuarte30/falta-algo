@@ -42,6 +42,7 @@ header h1 {
 header p {
   margin-bottom: 1rem;
 }
+
 header h1 span {
   color: var(--primary);
 }
@@ -50,11 +51,12 @@ header h1 span {
 /*Add section*/
 #add-item {
   position: sticky;
-  top: 6rem; 
+  top: 6rem;
   z-index: 1000;
   background-color: var(--bg);
   padding-bottom: 0.895rem;
 }
+
 #item-form {
   display: flex;
   flex-direction: column;
@@ -65,8 +67,7 @@ header h1 span {
 
 #item-input,
 #category-select,
-#add-button,
-#reset-button {
+#add-button {
   min-height: var(--touch-target);
   padding: 0 var(--spacing-md);
   border-radius: 0.8rem;
@@ -92,19 +93,6 @@ header h1 span {
 }
 
 #add-button:hover {
-  background-color: var(--primary-dark);
-}
-
-#reset-button{
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-#reset-button:hover {
   background-color: var(--primary-dark);
 }
 
@@ -161,12 +149,45 @@ header h1 span {
   min-height: var(--touch-target);
 }
 
-.inventory-item::after {
-  display: inline-block;
-  margin-left: 1rem;
-  min-width: 2.5rem;
-  text-align: right;
+.item-status {
   font-size: 1.5rem;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.inventory-item.missing .item-status::before {
+  content: "❌";
+}
+.inventory-item.checked .item-status::before {
+  content: "✅";
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--danger);
+  font-size: 1.6rem;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+  transition: background 0.2s;
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.remove-btn:hover {
+  background-color: #fff5f5;
 }
 
 /* Status: OUT OF STOCK (Red) */
@@ -176,19 +197,11 @@ header h1 span {
   color: #c0392b;
 }
 
-.inventory-item.missing::after {
-  content: "❌";
-}
-
 /* Status: IN CART (Green) */
 .inventory-item.checked {
   background-color: #f0fff4;
   border-color: var(--primary);
   opacity: 0.6;
-}
-
-.inventory-item.checked::after {
-  content: "✅";
 }
 
 @media (min-width: 769px) {
@@ -199,12 +212,11 @@ header h1 span {
 
   #item-form {
     flex-direction: row;
-    align-items: stretch; 
-
+    align-items: stretch;
   }
 
   #add-button {
-    white-space: nowrap; 
+    white-space: nowrap;
     padding: 0 20px;
   }
 }
