@@ -134,6 +134,25 @@ header h1 span {
   padding: 0;
 }
 
+.toggle-btn {
+  color: var(--primary-dark);
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+  font-size: 1.5rem;
+}
+
+.toggle-btn:hover {
+  color: var(--primary);
+}
+
+.items-container.collapsed {
+  display: none;
+}
+
+
 .inventory-item {
   display: flex;
   justify-content: space-between;

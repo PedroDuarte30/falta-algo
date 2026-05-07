@@ -26,6 +26,22 @@ function renderizarInventario() {
         title.textContent = categoria;
         group.appendChild(title);
 
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'toggle-btn';
+        toggleBtn.textContent = '▼';
+        title.appendChild(toggleBtn);
+
+        toggleBtn.addEventListener('click', () => {
+            list.classList.toggle('collapsed');
+            if (list.classList.contains('collapsed')) {
+                toggleBtn.textContent = "►"
+            } else {
+                toggleBtn.textContent = "▼";
+            }
+       });
+
+
+
         const list = document.createElement('ul');
         list.className = 'items-container';
 

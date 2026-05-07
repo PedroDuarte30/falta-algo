@@ -30,4 +30,7 @@
 
   /* Touch Targets */
   --touch-target: 4.8rem;
+
+  /*ToggleBtn*/
+  --btn-color: #C5D89D;
 }
