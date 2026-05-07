@@ -60,7 +60,7 @@ header h1 span {
 #item-form {
   display: flex;
   flex-direction: column;
-  padding: 1rem 0 2rem 0;
+  padding: 1rem 0 1rem 0;
   gap: var(--spacing-md);
   border-radius: var(--radius);
 }
@@ -100,7 +100,7 @@ header h1 span {
 #category-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 0;
 }
 
 /* Utility class for hiding accessibility labels */
@@ -124,6 +124,10 @@ header h1 span {
   letter-spacing: 0.1rem;
   border-bottom: 0.2rem solid var(--border);
   padding-bottom: 0.5rem;
+}
+
+.category-group {
+  padding-bottom: var(--spacing-lg);
 }
 
 .items-container {
