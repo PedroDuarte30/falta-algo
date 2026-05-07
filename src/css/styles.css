@@ -124,6 +124,9 @@ header h1 span {
   letter-spacing: 0.1rem;
   border-bottom: 0.2rem solid var(--border);
   padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .category-group {
@@ -145,7 +148,9 @@ header h1 span {
   padding: 0.5rem;
   cursor: pointer;
   border-radius: 0.4rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .toggle-btn:hover {
