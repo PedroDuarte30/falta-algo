@@ -28,15 +28,15 @@ function renderizarInventario() {
 
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'toggle-btn';
-        toggleBtn.textContent = '▼';
+        toggleBtn.innerHTML = '<i class="ri-arrow-down-s-line"></i>';
         title.appendChild(toggleBtn);
 
         toggleBtn.addEventListener('click', () => {
             list.classList.toggle('collapsed');
             if (list.classList.contains('collapsed')) {
-                toggleBtn.textContent = "►"
+               toggleBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
             } else {
-                toggleBtn.textContent = "▼";
+                toggleBtn.innerHTML = '<i class="ri-arrow-down-s-line"></i>';
             }
        });
 
