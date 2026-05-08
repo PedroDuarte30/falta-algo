@@ -31,7 +31,7 @@ function renderizarInventario() {
         toggleBtn.innerHTML = '<i class="ri-arrow-down-s-line"></i>';
         title.appendChild(toggleBtn);
 
-        toggleBtn.addEventListener('click', () => {
+        title.addEventListener('click', () => {
             list.classList.toggle('collapsed');
             if (list.classList.contains('collapsed')) {
                toggleBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
