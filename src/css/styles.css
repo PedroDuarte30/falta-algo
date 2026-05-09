@@ -17,6 +17,7 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
   padding: 2rem;
+  padding-bottom: 8rem;
   line-height: 1.5;
 }
 
@@ -96,6 +97,29 @@ header h1 span {
   background-color: var(--primary-dark);
 }
 
+.tabs-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tab-btn {
+  border: none;
+  padding: 1.5rem;
+  background-color: var(--primary);
+  cursor: pointer;
+  border-radius: 0.4rem;
+  color: var(--card);
+  background-color: var(--primary);
+  opacity: 0.5; 
+}
+
+.tab-btn.active {
+  opacity: 1; 
+  font-weight: 600;
+}
+
+
 /*Inventory Section*/
 #category-wrapper {
   display: flex;
@@ -132,6 +156,11 @@ header h1 span {
 
 .category-group {
   padding-bottom: var(--spacing-lg);
+}
+
+.category-essenciais h2 {
+  color: #f39c12;
+  border-bottom-color: #f39c12;
 }
 
 .items-container {
@@ -232,6 +261,7 @@ header h1 span {
   border-color: var(--primary);
   opacity: 0.6;
 }
+
 
 @media (min-width: 769px) {
   .container {

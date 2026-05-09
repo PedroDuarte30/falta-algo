@@ -4,14 +4,32 @@ const itemInput = document.getElementById('item-input');
 const categorySelect = document.getElementById('category-select');
 
 let inventarioBase = {
-    "Laticínios e Ovos 🥚 🥛": ["Leite", "Leite Achocolatado", "Iogurtes", "Manteiga", "Ovos", "Queijo", "Fiambre"],
-    "Frutas & Vegetais 🍎": ["Maçãs", "Pêras", "Bananas", "Fruta da Época", "Saladas", "Tomate", "Pepino", "Cebola"],
+    "Laticínios e Ovos 🥚 🥛": ["Leite", "Leite Achocolatado", "Iogurtes", "Manteiga", "Ovos", "Queijo", "Natas"],
+    "Frutas & Vegetais 🍎": ["Maçãs", "Pêras", "Bananas", "Fruta da Época", "Saladas", "Tomate", "Pepino",],
     "Talho 🥩": ["Frango", "Bifes de Peru", "Peito de Frango", "Carne Picada", "Hambúrguer"],
-    "Congelados 🥶": ["Nuggets", "Douradinhos", "Brócolos", "Couve Flor", "Feijão verde"],
-    "Mercearia 🧺": ["Cereais", "Arroz", "Massa", "Farinha", "Azeite", "Conservas", "Temperos e Sal", "Chocolate de Barrar", "Açúcar"],
-    "Higiene 🧼 e Limpeza 🫧": ["Champôs e Condicionadores", "Gel de banho", "Papel Higiénico", "Pasta de Dentes"],
-    "Extras ✨": []
+    "Charcutaria 🥓": ['Fiambre', "Bacon"],
+    "Congelados 🥶": ["Nuggets", "Coxinhas", "Brócolos", "Couve Flor", "Feijão verde", "Salteado batata e salsicha"],
+    "Mercearia 🧺": ["Cereais", "Arroz", "Massa", "Farinha", "Azeite", "Conservas", "Pão", "Bolachas", "Pães de leite", "Madalenas", "Croissant", "Polpa de tomate"],
+    "Higiene 🧼 e Limpeza 🫧": ["Champôs e Condicionadores", "Gel de banho", "Papel Higiénico", "Pasta de Dentes", "Esfregonas", "Gel WC", "Esponjas", "Toalhetes limpa óculos"],
+    "Essenciais ⭐": []
 };
+
+const tabsContainer = document.createElement('div');
+tabsContainer.className = 'tabs-container';
+
+const tabInventario = document.createElement('button');
+tabInventario.className = 'tab-btn active';
+tabInventario.textContent = '📋 Inventário';
+tabsContainer.appendChild(tabInventario);
+
+const tabEssenciais = document.createElement('button');
+tabEssenciais.className = 'tab-btn';
+tabEssenciais.textContent = '⭐ Essenciais';
+tabsContainer.appendChild(tabEssenciais);
+
+const main = document.querySelector('main');
+const inventorySection = document.querySelector('#inventory-section');
+main.insertBefore(tabsContainer, inventorySection);
 
 function renderizarInventario() {
     categoryWrapper.innerHTML = '';
@@ -21,6 +39,9 @@ function renderizarInventario() {
     for (const categoria in inventarioBase) {
         const group = document.createElement('div');
         group.className = 'category-group';
+        if (categoria === 'Essenciais ⭐') {
+            group.classList.add('category-essenciais');
+        }
 
         const title = document.createElement('h2');
         title.textContent = categoria;
@@ -34,13 +55,11 @@ function renderizarInventario() {
         title.addEventListener('click', () => {
             list.classList.toggle('collapsed');
             if (list.classList.contains('collapsed')) {
-               toggleBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
+                toggleBtn.innerHTML = '<i class="ri-arrow-right-s-line"></i>';
             } else {
                 toggleBtn.innerHTML = '<i class="ri-arrow-down-s-line"></i>';
             }
-       });
-
-
+        });
 
         const list = document.createElement('ul');
         list.className = 'items-container';
@@ -87,8 +106,21 @@ function renderizarInventario() {
 
         group.appendChild(list);
         categoryWrapper.appendChild(group);
+
+        if (tabAtiva === 'essenciais') {
+            const groups = document.querySelectorAll('.category-group');
+            groups.forEach(group => {
+                if (group.classList.contains('category-essenciais')) {
+                    group.style.display = 'block';
+                } else {
+                    group.style.display = 'none';
+                }
+            });
+        }
     }
 }
+
+
 
 function guardarlocalStorage() {
     localStorage.setItem('meuInventario', JSON.stringify(inventarioBase));
@@ -130,6 +162,34 @@ itemForm.addEventListener('submit', (e) => {
             itemInput.focus();
         }
     }
+
+});
+
+tabEssenciais.addEventListener('click', () => {
+    tabAtiva = 'essenciais';
+    const groups = document.querySelectorAll('.category-group');
+    tabInventario.classList.remove('active');
+    tabEssenciais.classList.add('active');
+
+    groups.forEach(group => {
+        if (group.classList.contains('category-essenciais')) {
+            group.style.display = 'block';
+        } else {
+            group.style.display = 'none';
+        }
+    });
+});
+
+tabInventario.addEventListener('click', () => {
+    tabAtiva = 'inventario';
+    const groups = document.querySelectorAll('.category-group');
+    tabInventario.classList.add('active');
+    tabEssenciais.classList.remove('active');
+
+    groups.forEach(group => {
+        group.style.display = 'block';
+    });
+
 });
 
 carregarLocalStorage();
