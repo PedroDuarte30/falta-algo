@@ -11,8 +11,10 @@ let inventarioBase = {
     "Congelados 🥶": ["Nuggets", "Coxinhas", "Brócolos", "Couve Flor", "Feijão verde", "Salteado batata e salsicha"],
     "Mercearia 🧺": ["Cereais", "Arroz", "Massa", "Farinha", "Azeite", "Conservas", "Pão", "Bolachas", "Pães de leite", "Madalenas", "Croissant", "Polpa de tomate"],
     "Higiene 🧼 e Limpeza 🫧": ["Champôs e Condicionadores", "Gel de banho", "Papel Higiénico", "Pasta de Dentes", "Esfregonas", "Gel WC", "Esponjas", "Toalhetes limpa óculos"],
-    "Essenciais ⭐": []
+    "Essenciais ⭐": [],
 };
+
+let tabAtiva = 'inventario';
 
 const tabsContainer = document.createElement('div');
 tabsContainer.className = 'tabs-container';
@@ -106,21 +108,28 @@ function renderizarInventario() {
 
         group.appendChild(list);
         categoryWrapper.appendChild(group);
+    }
 
-        if (tabAtiva === 'essenciais') {
-            const groups = document.querySelectorAll('.category-group');
-            groups.forEach(group => {
-                if (group.classList.contains('category-essenciais')) {
-                    group.style.display = 'block';
-                } else {
-                    group.style.display = 'none';
-                }
-            });
-        }
+    if (tabAtiva === 'essenciais') {
+        const groups = document.querySelectorAll('.category-group');
+        groups.forEach(group => {
+            if (group.classList.contains('category-essenciais')) {
+                group.style.display = 'block';
+            } else {
+                group.style.display = 'none';
+            }
+        });
+    } else {
+        const groups = document.querySelectorAll('.category-group');
+        groups.forEach(group => {
+            if (group.classList.contains('category-essenciais')) {
+                group.style.display = 'none';
+            } else {
+                group.style.display = 'block';
+            }
+        });
     }
 }
-
-
 
 function guardarlocalStorage() {
     localStorage.setItem('meuInventario', JSON.stringify(inventarioBase));
@@ -187,9 +196,12 @@ tabInventario.addEventListener('click', () => {
     tabEssenciais.classList.remove('active');
 
     groups.forEach(group => {
-        group.style.display = 'block';
+        if (group.classList.contains('category-essenciais')) {
+            group.style.display = 'none'; // esconde essenciais no inventário
+        } else {
+            group.style.display = 'block';
+        }
     });
-
 });
 
 carregarLocalStorage();
