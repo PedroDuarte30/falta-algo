@@ -32,5 +32,31 @@
   --touch-target: 4.8rem;
 
   /*ToggleBtn*/
-  --btn-color: #C5D89D;
+  --btn-color: #c5d89d;
+
+  --missing-bg: #fff5f5;
+  --missing-text: #c0392b;
+  --checked-bg: #f0fff4;
+  --hover-danger-bg: #fff5f5;
+  --checked-text: #2d3436;
+}
+
+:root.dark {
+  --primary: #27ae60;
+  --primary-dark: #1e8449;
+  --primary-light: #1a3a2a;
+  --bg: #1e1e1e;
+  --card: #2d2d2d;
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --danger: #ff7675;
+  --border: #3d3d3d;
+  --shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.3);
+  --input-bg: #3d3d3d;
+  --input-text: #e0e0e0;
+  --missing-bg: #3d1a1a;
+  --missing-text: #ff7675;
+  --checked-bg: #1a3a2a;
+  --hover-danger-bg: #3d1a1a;
+  --checked-text: #ffffff;
 }

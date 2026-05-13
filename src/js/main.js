@@ -33,6 +33,22 @@ const main = document.querySelector('main');
 const inventorySection = document.querySelector('#inventory-section');
 main.insertBefore(tabsContainer, inventorySection);
 
+//Dark Mode
+const darkModeBtn = document.createElement('button');
+darkModeBtn.className = 'dark-mode-btn';
+darkModeBtn.innerHTML = '<i class="ri-moon-line"></i>'
+
+darkModeBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle('dark');
+
+    if (document.documentElement.classList.contains('dark')) {
+        darkModeBtn.innerHTML = '<i class="ri-sun-line"></i>';
+    } else {
+        darkModeBtn.innerHTML = '<i class="ri-moon-line"></i>';
+    }
+});
+document.querySelector('header').appendChild(darkModeBtn);
+
 function renderizarInventario() {
     categoryWrapper.innerHTML = '';
 
