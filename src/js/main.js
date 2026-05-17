@@ -16,22 +16,16 @@ let baseInventory = {
 
 let activeTab = 'inventory';
 
-const tabsContainer = document.createElement('div');
-tabsContainer.className = 'tabs-container';
-
 const tabInventory = document.createElement('button');
 tabInventory.className = 'tab-btn active';
 tabInventory.textContent = '📋 Inventário';
-tabsContainer.appendChild(tabInventory);
 
 const tabEssentials = document.createElement('button');
 tabEssentials.className = 'tab-btn';
 tabEssentials.textContent = '⭐ Essenciais';
-tabsContainer.appendChild(tabEssentials);
 
 const main = document.querySelector('main');
 const inventorySection = document.querySelector('#inventory-section');
-main.insertBefore(tabsContainer, inventorySection);
 
 // Dark Mode
 const darkModeBtn = document.createElement('button');
@@ -48,6 +42,27 @@ darkModeBtn.addEventListener('click', () => {
     }
 });
 document.querySelector('header').appendChild(darkModeBtn);
+
+const resetBtn = document.createElement('button');
+resetBtn.className = "reset-button";
+resetBtn.innerHTML = '<i class="ri-reset-right-fill"></i> Repor Lista';
+
+resetBtn.addEventListener('click', () => {
+    if (window.confirm("Tem a certeza que pretende repor a lista?")) {
+        localStorage.removeItem('meuInventario');
+        localStorage.removeItem('meuInventario_estados');
+        location.reload();
+    }
+});
+
+const navBar = document.createElement('div');
+navBar.className = 'nav-bar';
+navBar.appendChild(tabInventory);
+navBar.appendChild(tabEssentials);
+navBar.appendChild(resetBtn);
+main.insertBefore(navBar, inventorySection);
+
+
 
 function renderInventory() {
     categoryWrapper.innerHTML = '';
