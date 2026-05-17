@@ -49,6 +49,7 @@ darkModeBtn.addEventListener("click", () => {
 });
 document.querySelector('header').appendChild(darkModeBtn);
 
+
 function renderizarInventario() {
     categoryWrapper.innerHTML = '';
 
