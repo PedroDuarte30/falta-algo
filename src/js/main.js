@@ -3,42 +3,42 @@ const itemForm = document.getElementById('item-form');
 const itemInput = document.getElementById('item-input');
 const categorySelect = document.getElementById('category-select');
 
-let inventarioBase = {
+let baseInventory = {
     "Laticínios e Ovos 🥚 🥛": ["Leite", "Leite Achocolatado", "Iogurtes", "Manteiga", "Ovos", "Queijo", "Natas"],
-    "Frutas & Vegetais 🍎": ["Maçãs", "Pêras", "Bananas", "Fruta da Época", "Saladas", "Tomate", "Pepino",],
+    "Frutas & Vegetais 🍎": ["Maçãs", "Pêras", "Bananas", "Fruta da Época", "Saladas", "Tomate", "Pepino"],
     "Talho 🥩": ["Frango", "Bifes de Peru", "Peito de Frango", "Carne Picada", "Hambúrguer"],
-    "Charcutaria 🥓": ['Fiambre', "Bacon"],
+    "Charcutaria 🥓": ["Fiambre", "Bacon"],
     "Congelados 🥶": ["Nuggets", "Coxinhas", "Brócolos", "Couve Flor", "Feijão verde", "Salteado batata e salsicha"],
     "Mercearia 🧺": ["Cereais", "Arroz", "Massa", "Farinha", "Azeite", "Conservas", "Pão", "Bolachas", "Pães de leite", "Madalenas", "Croissant", "Polpa de tomate"],
     "Higiene 🧼 e Limpeza 🫧": ["Champôs e Condicionadores", "Gel de banho", "Papel Higiénico", "Pasta de Dentes", "Esfregonas", "Gel WC", "Esponjas", "Toalhetes limpa óculos"],
     "Essenciais ⭐": [],
 };
 
-let tabAtiva = 'inventario';
+let activeTab = 'inventory';
 
 const tabsContainer = document.createElement('div');
 tabsContainer.className = 'tabs-container';
 
-const tabInventario = document.createElement('button');
-tabInventario.className = 'tab-btn active';
-tabInventario.textContent = '📋 Inventário';
-tabsContainer.appendChild(tabInventario);
+const tabInventory = document.createElement('button');
+tabInventory.className = 'tab-btn active';
+tabInventory.textContent = '📋 Inventário';
+tabsContainer.appendChild(tabInventory);
 
-const tabEssenciais = document.createElement('button');
-tabEssenciais.className = 'tab-btn';
-tabEssenciais.textContent = '⭐ Essenciais';
-tabsContainer.appendChild(tabEssenciais);
+const tabEssentials = document.createElement('button');
+tabEssentials.className = 'tab-btn';
+tabEssentials.textContent = '⭐ Essenciais';
+tabsContainer.appendChild(tabEssentials);
 
 const main = document.querySelector('main');
 const inventorySection = document.querySelector('#inventory-section');
 main.insertBefore(tabsContainer, inventorySection);
 
-//Dark Mode
+// Dark Mode
 const darkModeBtn = document.createElement('button');
 darkModeBtn.className = 'dark-mode-btn';
-darkModeBtn.innerHTML = '<i class="ri-moon-line"></i>'
+darkModeBtn.innerHTML = '<i class="ri-moon-line"></i>';
 
-darkModeBtn.addEventListener("click", () => {
+darkModeBtn.addEventListener('click', () => {
     document.documentElement.classList.toggle('dark');
 
     if (document.documentElement.classList.contains('dark')) {
@@ -49,21 +49,20 @@ darkModeBtn.addEventListener("click", () => {
 });
 document.querySelector('header').appendChild(darkModeBtn);
 
-
-function renderizarInventario() {
+function renderInventory() {
     categoryWrapper.innerHTML = '';
 
-    const estadosSalvos = JSON.parse(localStorage.getItem('meuInventario_estados')) || {};
+    const savedStates = JSON.parse(localStorage.getItem('meuInventario_estados')) || {};
 
-    for (const categoria in inventarioBase) {
+    for (const category in baseInventory) {
         const group = document.createElement('div');
         group.className = 'category-group';
-        if (categoria === 'Essenciais ⭐') {
+        if (category === 'Essenciais ⭐') {
             group.classList.add('category-essenciais');
         }
 
         const title = document.createElement('h2');
-        title.textContent = categoria;
+        title.textContent = category;
         group.appendChild(title);
 
         const toggleBtn = document.createElement('button');
@@ -83,21 +82,21 @@ function renderizarInventario() {
         const list = document.createElement('ul');
         list.className = 'items-container';
 
-        inventarioBase[categoria].forEach((item) => {
+        baseInventory[category].forEach((item) => {
             const li = document.createElement('li');
             li.className = 'inventory-item';
             li.innerHTML = `
                 <span>${item}</span>
                 <div class="item-actions">
-                <span class="item-status"></span>
-                <button class="remove-btn" aria-label="Remover ${item}">
-                <i class="ri-delete-bin-line"></i>
-                </button>
+                    <span class="item-status"></span>
+                    <button class="remove-btn" aria-label="Remove ${item}">
+                        <i class="ri-delete-bin-line"></i>
+                    </button>
                 </div>
-                `;
+            `;
 
-            if (estadosSalvos[item]) {
-                li.classList.add(estadosSalvos[item]);
+            if (savedStates[item]) {
+                li.classList.add(savedStates[item]);
             }
 
             li.addEventListener('click', () => {
@@ -109,15 +108,15 @@ function renderizarInventario() {
                 } else {
                     li.classList.remove('checked');
                 }
-                guardarlocalStorage();
+                saveToLocalStorage();
             });
 
             const removeBtn = li.querySelector('.remove-btn');
             removeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                inventarioBase[categoria] = inventarioBase[categoria].filter((i) => i !== item);
-                guardarlocalStorage();
-                renderizarInventario();
+                baseInventory[category] = baseInventory[category].filter((i) => i !== item);
+                saveToLocalStorage();
+                renderInventory();
             });
 
             list.appendChild(li);
@@ -127,7 +126,7 @@ function renderizarInventario() {
         categoryWrapper.appendChild(group);
     }
 
-    if (tabAtiva === 'essenciais') {
+    if (activeTab === 'essentials') {
         const groups = document.querySelectorAll('.category-group');
         groups.forEach(group => {
             if (group.classList.contains('category-essenciais')) {
@@ -148,54 +147,53 @@ function renderizarInventario() {
     }
 }
 
-function guardarlocalStorage() {
-    localStorage.setItem('meuInventario', JSON.stringify(inventarioBase));
+function saveToLocalStorage() {
+    localStorage.setItem('meuInventario', JSON.stringify(baseInventory));
 
-    const estados = {};
+    const states = {};
     document.querySelectorAll('.inventory-item').forEach(li => {
-        const nome = li.querySelector('span').textContent;
+        const name = li.querySelector('span').textContent;
         if (li.classList.contains('missing')) {
-            estados[nome] = 'missing';
+            states[name] = 'missing';
         } else if (li.classList.contains('checked')) {
-            estados[nome] = 'checked';
+            states[name] = 'checked';
         }
     });
-    localStorage.setItem('meuInventario_estados', JSON.stringify(estados));
+    localStorage.setItem('meuInventario_estados', JSON.stringify(states));
 }
 
-function carregarLocalStorage() {
-    const dadosSalvos = localStorage.getItem('meuInventario');
+function loadFromLocalStorage() {
+    const savedData = localStorage.getItem('meuInventario');
 
-    if (dadosSalvos) {
-        inventarioBase = JSON.parse(dadosSalvos);
+    if (savedData) {
+        baseInventory = JSON.parse(savedData);
     }
 
-    renderizarInventario();
+    renderInventory();
 }
 
 itemForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const valor = itemInput.value.trim();
-    const categoriaEscolhida = categorySelect.value;
+    const value = itemInput.value.trim();
+    const selectedCategory = categorySelect.value;
 
-    if (valor !== "") {
-        if (inventarioBase[categoriaEscolhida]) {
-            inventarioBase[categoriaEscolhida].push(valor);
+    if (value !== "") {
+        if (baseInventory[selectedCategory]) {
+            baseInventory[selectedCategory].push(value);
             itemInput.value = "";
-            guardarlocalStorage();
-            renderizarInventario();
+            saveToLocalStorage();
+            renderInventory();
             itemInput.focus();
         }
     }
-
 });
 
-tabEssenciais.addEventListener('click', () => {
-    tabAtiva = 'essenciais';
+tabEssentials.addEventListener('click', () => {
+    activeTab = 'essentials';
     const groups = document.querySelectorAll('.category-group');
-    tabInventario.classList.remove('active');
-    tabEssenciais.classList.add('active');
+    tabInventory.classList.remove('active');
+    tabEssentials.classList.add('active');
 
     groups.forEach(group => {
         if (group.classList.contains('category-essenciais')) {
@@ -206,19 +204,19 @@ tabEssenciais.addEventListener('click', () => {
     });
 });
 
-tabInventario.addEventListener('click', () => {
-    tabAtiva = 'inventario';
+tabInventory.addEventListener('click', () => {
+    activeTab = 'inventory';
     const groups = document.querySelectorAll('.category-group');
-    tabInventario.classList.add('active');
-    tabEssenciais.classList.remove('active');
+    tabInventory.classList.add('active');
+    tabEssentials.classList.remove('active');
 
     groups.forEach(group => {
         if (group.classList.contains('category-essenciais')) {
-            group.style.display = 'none'; // esconde essenciais no inventário
+            group.style.display = 'none';
         } else {
             group.style.display = 'block';
         }
     });
 });
 
-carregarLocalStorage();
+loadFromLocalStorage();
